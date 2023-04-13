@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\knowledge station 23.props" />
+</Project>
