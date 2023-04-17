@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hSko/Rh/QM9yw6O7s0H/A0uCzC/LUUhxlhDd0UAKT4Q=",
+  "Hash": "YqjTL11I7ulYMPx1J4JmBDsnhWx6ujxACx2aM+1Fc9c=",
   "Source": "knowledge station 23",
   "BasePath": "_content/knowledge station 23",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Project\\knowledge station 23\\knowledge station 23\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\knowledge station 23.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Project\\knowledge station 23\\knowledge station 23\\wwwroot\\css\\BootWatchTheme.css",
+      "SourceId": "knowledge station 23",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Project\\knowledge station 23\\knowledge station 23\\wwwroot\\",
+      "BasePath": "_content/knowledge station 23",
+      "RelativePath": "css/BootWatchTheme.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\BootWatchTheme.css"
     },
     {
       "Identity": "C:\\Project\\knowledge station 23\\knowledge station 23\\wwwroot\\css\\site.css",
