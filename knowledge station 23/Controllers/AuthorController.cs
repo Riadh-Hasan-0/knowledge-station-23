@@ -24,16 +24,16 @@ namespace knowledge_station_23.Controllers
             return View();
         }
         //post
-        public IActionResult Create(Author obj)
+       /* public IActionResult Create(Author obj)
         {
-            var uniqueFileName = UploadImage(obj);
-            Db.AuthorList.Add(obj);
+*//*            obj.Path = UploadImage(obj);
+*//*            Db.AuthorList.Add(obj);
             Db.SaveChanges();
             return RedirectToAction("Index");
-        }
-        private string UploadImage(Author obj)
+        }*/
+       /* private string UploadImage(Author obj)
         {
-            string uniqueFileName = string.Empty;
+            *//*string uniqueFileName = string.Empty;
             if (obj.ImagePath != null)
             {
                 string uploadFolder = Path.Combine(environment.WebRootPath, "Image/");
@@ -44,8 +44,8 @@ namespace knowledge_station_23.Controllers
                     obj.ImagePath.CopyTo(fileStream);
                 }
             }
-           
-            return uniqueFileName;
-        }
+           */
+/*            return uniqueFileName;
+*//*        }*/
     }
 }
