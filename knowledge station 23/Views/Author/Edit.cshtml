@@ -27,6 +27,11 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+            <div class="form-group mb-3">
+                <label asp-for="Path" hidden ></label>
+                <input asp-for="Path" hidden value="@Model.Path" class="form-control" />
+                <span asp-validation-for="Path" class="text-danger"></span>
+            </div>
             <div class="row">
                 <div class="col-8">
                     <label asp-for="ImagePath"></label>
@@ -34,7 +39,7 @@
 
                 </div>
                 <div class="col-4">
-                    <img src="https://placehold.jp/150*150.png" id="PreviewImage" style="width:100px;height:100px;border:1px solid red;border-radius:10px; padding:10px;" alt="Author Image" />
+                    <img src="/Content/Image/Author/@Model.Path" id="PreviewImage" style="width:100px;height:100px;border:1px solid red;border-radius:10px; padding:10px;" alt="Author Image" />
                 </div>
             </div>
             <div class="form-group mb-3">

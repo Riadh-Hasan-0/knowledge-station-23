@@ -28,6 +28,7 @@ namespace knowledge_station_23.Controllers
         private string UploadImage(Author obj)
         {
             string uniqueFileName = string.Empty;
+
             if (obj.ImagePath != null)
             {
                 string uploadFolder = Path.Combine(environment.WebRootPath, "Content/Image/Author/");
@@ -78,12 +79,13 @@ namespace knowledge_station_23.Controllers
                 {
                     obj.Path = UploadImage(obj);
                 }
+                
+
                 Db.AuthorList.Update(obj);
                 Db.SaveChanges();
                 TempData["Success"] = "Author Information Edit Successfully";
                 return RedirectToAction("Index");
             
-            return View(obj);
            
         }
         public IActionResult Details(int? id)
@@ -95,8 +97,14 @@ namespace knowledge_station_23.Controllers
             return View(tuple);
         }
         public IActionResult Delete(int? id) {
-         
-            return View();
+            if(id==null ||id==0)return NotFound();
+            var author = Db.AuthorList.Find(id);
+            if(author == null) return NotFound();
+            var bookList = Db.BookList.Where(a => a.AuthorId == id).ToList();
+            foreach(var obj in bookList) { Db.BookList.Remove(obj); }
+            Db.AuthorList.Remove(author);
+            Db.SaveChanges();
+            return RedirectToAction("Index");
         }
         
     }
