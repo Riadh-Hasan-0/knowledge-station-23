@@ -61,6 +61,35 @@ namespace knowledge_station_23.Controllers
             TempData["Success"] = "failed to save";
             return View(obj);
         }
+        public IActionResult Edit(int? id)
+        {
+            if(id== null||id==0)return NotFound();
+            var author = Db.AuthorList.Find(id);
+            if (author == null) return NotFound();
+            return View(author);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Author obj)
+        {
+            if (obj == null ) return NotFound();
+            
+                if (obj.ImagePath != null)
+                {
+                    obj.Path = UploadImage(obj);
+                }
+                Db.AuthorList.Update(obj);
+                Db.SaveChanges();
+                TempData["Success"] = "Author Information Edit Successfully";
+                return RedirectToAction("Index");
+            
+            return View(obj);
+           
+        }
+        public IActionResult Delete(int? id) {
+         
+            return View();
+        }
         
     }
 }
