@@ -42,6 +42,15 @@ namespace knowledge_station_23.Controllers
 
             return uniqueFileName;
         }
+        private void DeleteImage(string path)
+        {
+            string filePath = Path.Combine(environment.WebRootPath, "Content/Image/Author/", path);
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+
+        }
         //Get
         public IActionResult Create()
         {
@@ -77,6 +86,7 @@ namespace knowledge_station_23.Controllers
             
                 if (obj.ImagePath != null)
                 {
+                    DeleteImage(obj.Path);
                     obj.Path = UploadImage(obj);
                 }
                 
@@ -96,12 +106,17 @@ namespace knowledge_station_23.Controllers
             var tuple= Tuple.Create(author, bookList);
             return View(tuple);
         }
+        
         public IActionResult Delete(int? id) {
             if(id==null ||id==0)return NotFound();
             var author = Db.AuthorList.Find(id);
             if(author == null) return NotFound();
             var bookList = Db.BookList.Where(a => a.AuthorId == id).ToList();
-            foreach(var obj in bookList) { Db.BookList.Remove(obj); }
+            foreach(var obj in bookList) {
+                DeleteImage(obj.Path);
+                Db.BookList.Remove(obj); 
+            }
+            DeleteImage(author.Path);
             Db.AuthorList.Remove(author);
             Db.SaveChanges();
             return RedirectToAction("Index");
