@@ -86,6 +86,14 @@ namespace knowledge_station_23.Controllers
             return View(obj);
            
         }
+        public IActionResult Details(int? id)
+        {
+            if(id==null||id==0)return NotFound();
+            var author = Db.AuthorList.Find(id);
+            var bookList = Db.BookList.Where(a => a.AuthorId == id).ToList();
+            var tuple= Tuple.Create(author, bookList);
+            return View(tuple);
+        }
         public IActionResult Delete(int? id) {
          
             return View();

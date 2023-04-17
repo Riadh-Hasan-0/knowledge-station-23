@@ -23,19 +23,14 @@
             <div class="col-3">
             <div>
                 <div >
-                        <a asp-action="Details" asp-route-id="@obj.Id" style="text-decoration: none;">
+                       <a asp-action="Details" asp-route-id="@obj.Id" style="text-decoration: none;">
                   <img src="@imagePath" style="width:200px;height:200px;border:1px solid black;border-radius:10px; padding:20px;" />
                   </a>
                 </div>
                 <div>
-                        Name:<a asp-action="Details" asp-route-id="@obj.Id" style="text-decoration: none;">@obj.Name</a>
+                        Name:<a asp-action="Details" asp-route-id="@obj.Id" style="text-decoration: none;">&nbsp;@obj.Name</a>
                 </div>
-                <div class="btn-group">
-                        <a asp-action="Edit" asp-route-id="@obj.Id" class="btn  btn-primary" >Edit</a>
-                       
-                        <a asp-action="Delete" asp-route-id="@obj.Id" class="btn  btn-danger">Delete</a>
-
-                </div>
+                
             </div>
         </div>
         }
