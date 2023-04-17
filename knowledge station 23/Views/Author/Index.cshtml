@@ -2,6 +2,10 @@
 @{
     ViewData["Title"] = "Author List";
 }
+@if (TempData["Success"] != null)
+{
+    <h2>@TempData["Success"]</h2>
+}
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
@@ -13,4 +17,23 @@
             </a>
         </div>
     </div>
+    <div class="row">
+        @foreach (var obj in Model){
+            var imagePath = "Content/Image/Author/" + obj.Path;
+            <div class="col-3">
+            <div>
+                <div >
+                  <img src="@imagePath" style="width:200px;height:200px;border:1px solid black;border-radius:10px; padding:20px;" />
+                </div>
+                <div>
+                        Name: @obj.Name
+                </div>
+                <div class="btn-group">
+                        <a asp-action="Edit" asp-route-id="@obj.Id" class="btn  btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@obj.Id" class="btn  btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        }
+    </div>    
 </div>
