@@ -17,7 +17,7 @@ namespace knowledge_station_23.Models
         public string Path { get; set; }
         [NotMapped]
         [Display(Name = "Choose Image")]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile ImagePath { get; set; }
 
     }
 }
