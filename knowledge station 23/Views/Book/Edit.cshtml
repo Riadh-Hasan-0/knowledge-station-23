@@ -18,6 +18,10 @@
                 <label asp-for="Language"></label>
                 <input asp-for="Language" class="form-control" />
                 <span asp-validation-for="Language" class="text-danger"></span>
+            </div><div class="form-group mb-3">
+                <label asp-for="Path" hidden ></label>
+                <input asp-for="Path" hidden class="form-control" />
+                <span asp-validation-for="Path" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
                 <label asp-for="Description"></label>
@@ -45,7 +49,7 @@
                 </div>
             </div>
             <div class="form-group mb-3">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
                 <a class="btn btn-secondary float-end" asp-action="Index"><i class="bi bi-backspace"></i>&nbsp;Back to List</a>
             </div>
         </form>

@@ -8,17 +8,17 @@ namespace knowledge_station_23.Controllers
     public class BookController : Controller
     {
 
-        private readonly ApplicationDbContext Db;
-        private readonly IWebHostEnvironment Environment;
+        private readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _environment;
         public BookController(ApplicationDbContext db, IWebHostEnvironment environment)
         {
-            this.Db = db;
-            this.Environment = environment;
+            this._db = db;
+            this._environment = environment;
         }
         public IActionResult Index()
         {
             TempData["Success"] = "Welcome";
-            IEnumerable<Book> objBookList = this.Db.BookList;
+            IEnumerable<Book> objBookList = this._db.BookList;
             return View(objBookList);
         }
         private string UploadImage(Book obj)
@@ -27,7 +27,7 @@ namespace knowledge_station_23.Controllers
 
             if (obj.ImagePath != null)
             {
-                string uploadFolder = Path.Combine(Environment.WebRootPath, "Content/Image/Book/");
+                string uploadFolder = Path.Combine(_environment.WebRootPath, "Content/Image/Book/");
                 uniqueFileName = Guid.NewGuid().ToString() + "_" + obj.ImagePath.FileName;
                 string filePath = Path.Combine(uploadFolder, uniqueFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -40,7 +40,7 @@ namespace knowledge_station_23.Controllers
         }
         private void DeleteImage(string path)
         {
-            string filePath = Path.Combine(Environment.WebRootPath, "Content/Image/Book/", path);
+            string filePath = Path.Combine(_environment.WebRootPath, "Content/Image/Book/", path);
             if (System.IO.File.Exists(filePath))
             {
                 System.IO.File.Delete(filePath);
@@ -49,7 +49,7 @@ namespace knowledge_station_23.Controllers
         }
         public IActionResult Create()
         {
-            var authors = this.Db.AuthorList.ToList();
+            var authors = this._db.AuthorList.ToList();
             ViewBag.Authors = new SelectList(authors, "Id", "Name");
             return View(); 
         }
@@ -60,8 +60,8 @@ namespace knowledge_station_23.Controllers
         {
 
             obj.Path = UploadImage(obj);
-            Db.BookList.Add(obj);
-            Db.SaveChanges();
+            _db.BookList.Add(obj);
+            _db.SaveChanges();
             TempData["Success"] = "New Book added successfully";
             return RedirectToAction("Index");
 
@@ -69,9 +69,9 @@ namespace knowledge_station_23.Controllers
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0) return NotFound();
-            var book = Db.BookList.Find(id);
+            var book = _db.BookList.Find(id);
             if (book == null) return NotFound();
-            var authors = this.Db.AuthorList.ToList();
+            var authors = this._db.AuthorList.ToList();
 
             ViewBag.Authors = new SelectList(authors, "Id", "Name", book.AuthorId);
 
@@ -90,8 +90,8 @@ namespace knowledge_station_23.Controllers
             }
 
 
-            Db.BookList.Update(obj);
-            Db.SaveChanges();
+            _db.BookList.Update(obj);
+            _db.SaveChanges();
             TempData["Success"] = "Book Information Edit Successfully";
             return RedirectToAction("Index");
 
@@ -99,20 +99,20 @@ namespace knowledge_station_23.Controllers
         public IActionResult Details(int? id)
         {
             if (id == null || id == 0) return NotFound();
-            var book = Db.BookList.Find(id);
-            var author = Db.AuthorList.Where(a => a.Id == book.AuthorId).SingleOrDefault();
+            var book = _db.BookList.Find(id);
+            var author = _db.AuthorList.Where(a => a.Id == book.AuthorId).SingleOrDefault();
             var tuple = Tuple.Create(book,author.Id,author.Name);
             return View(tuple);
         }
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0) return NotFound();
-            var book = Db.BookList.Find(id);
+            var book = _db.BookList.Find(id);
             if (book == null) return NotFound();
             
             DeleteImage(book.Path);
-            Db.BookList.Remove(book);
-            Db.SaveChanges();
+            _db.BookList.Remove(book);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
     }
