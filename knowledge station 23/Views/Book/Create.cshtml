@@ -1,0 +1,50 @@
+﻿@model Book
+
+<hr />
+
+
+<div class="row">
+    <div class="col-6 offset-3 border border-dark p-4 rounded-top">
+        <h4 class="text text-center">Book Information</h4>
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group mb-3">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Language"></label>
+                <input asp-for="Language" class="form-control" />
+                <span asp-validation-for="Language" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="AuthorId"></label>
+                @Html.DropDownListFor(model => model.AuthorId, ViewBag.Authors as SelectList, "--Please choose an author--", new { @class = "form-control" })
+                <span asp-validation-for="AuthorId" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <label asp-for="ImagePath"></label>
+                    <input asp-for="ImagePath" class="form-control" type="file" id="ChoseImage" />
+
+                </div>
+                <div class="col-4">
+                    <img src="https://placehold.jp/150*150.png" id="PreviewImage" style="width:100px;height:100px;border:1px solid red;border-radius:10px; padding:10px;" alt="Author Image" />
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-secondary float-end" asp-action="Index"><i class="bi bi-backspace"></i>&nbsp;Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/previewimage.js"></script>
+}
