@@ -9,6 +9,8 @@ namespace knowledge_station_23.Models
         public int Id { get; set; }
         [Required]
         public String Title { get; set; }
+        [Required]
+        public string Language { get; set; }
         public string Description { get; set; }
         [Required]
         [Display(Name = "Select Author")]
