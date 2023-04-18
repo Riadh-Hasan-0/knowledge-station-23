@@ -1,4 +1,7 @@
 ﻿@model Tuple<Author,List<Book>>
+@{
+    ViewData["Title"] = "Author Details";
+}
 <div class="container p-1">
     <div class="row pt-1">
         <div class="col-6">
@@ -34,7 +37,7 @@
         <div class="row">
             @foreach (var obj in Model.Item2)
             {
-                imagePath = "~/Content/Image/Author/" + obj.Path;
+                imagePath = "~/Content/Image/Book/" + obj.Path;
                 <div class="col-3">
                     <div>
                         <div>

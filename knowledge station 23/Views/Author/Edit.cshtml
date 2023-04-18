@@ -1,10 +1,9 @@
 ﻿@model Author
-
-<hr />
-@if (TempData["Success"] != null)
-{
-    <h2>@TempData["Success"]</h2>
+@{
+    ViewData["Title"] = "Edit Author";
 }
+<hr />
+
 <link rel="stylesheet" href="~/css/DataCard.css" />
 
 <div class="row">
@@ -44,7 +43,7 @@
             </div>
             <div class="form-group mb-3">
                 <input type="submit" value="Save Changes" class="btn btn-primary" />
-                <a class="btn btn-secondary float-end" asp-action="Index"><i class="bi bi-backspace"></i>&nbsp;Back to List</a>
+                <a class="btn btn-secondary float-end" asp-action="Details" asp-route-id="@Model.Id"><i class="bi bi-backspace"></i>&nbsp;Back to List</a>
             </div>
         </form>
     </div>
