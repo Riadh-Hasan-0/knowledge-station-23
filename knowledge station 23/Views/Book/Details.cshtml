@@ -1,4 +1,7 @@
 ﻿@model Tuple<Book,int,string>
+@{
+    ViewData["Title"] = "Book Details";
+}
 <div class="container p-1">
     <div class="row pt-1">
         <div class="col-6">
@@ -18,7 +21,7 @@
         <div class="col-3">
             <div> 
                 @{
-                    var imagePath = "~/Content/Image/Author/" + Model.Item1.Path;
+                    var imagePath = "~/Content/Image/Book/" + Model.Item1.Path;
                     <img src="@Url.Content(imagePath)" style="width:200px;height:250px;border:1px solid black;border-radius:10px; padding:20px;" />
                 }
              </div>
@@ -26,7 +29,7 @@
         <div class="col">
             <div class="row-3 mb-2" style="font-size:30px">Title:&nbsp;@Model.Item1.Title</div>
             <div class="row-3 mb-2" style="font-size:30px">Language:&nbsp;@Model.Item1.Language</div>
-            <div class="row-3 mb-2" style="font-size:30px">Author:&nbsp;@Model.Item3</div>
+            <div class="row-3 mb-2" style="font-size:30px">Author:<a asp-action="Details" asp-controller="Author" asp-route-id="@Model.Item2">&nbsp;@Model.Item3</a></div>
             <div class="row-3 mb-2" style="font-size:30px">Description:&nbsp;@Model.Item1.Description</div>
         </div>
      </div>
@@ -55,7 +58,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    If you Author @Model.Item1.Title Inforation all of his books also will be deleted.
+                    Are you Confirm you want to delete book "@Model.Item1.Title" Inforations.
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="bi bi-x-octagon"></i>&nbsp;Close</button>

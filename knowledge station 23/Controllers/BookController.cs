@@ -9,11 +9,11 @@ namespace knowledge_station_23.Controllers
     {
 
         private readonly ApplicationDbContext Db;
-        private readonly IWebHostEnvironment environment;
+        private readonly IWebHostEnvironment Environment;
         public BookController(ApplicationDbContext db, IWebHostEnvironment environment)
         {
             this.Db = db;
-            this.environment = environment;
+            this.Environment = environment;
         }
         public IActionResult Index()
         {
@@ -27,7 +27,7 @@ namespace knowledge_station_23.Controllers
 
             if (obj.ImagePath != null)
             {
-                string uploadFolder = Path.Combine(environment.WebRootPath, "Content/Image/Book/");
+                string uploadFolder = Path.Combine(Environment.WebRootPath, "Content/Image/Book/");
                 uniqueFileName = Guid.NewGuid().ToString() + "_" + obj.ImagePath.FileName;
                 string filePath = Path.Combine(uploadFolder, uniqueFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -40,7 +40,7 @@ namespace knowledge_station_23.Controllers
         }
         private void DeleteImage(string path)
         {
-            string filePath = Path.Combine(environment.WebRootPath, "Content/Image/Book/", path);
+            string filePath = Path.Combine(Environment.WebRootPath, "Content/Image/Book/", path);
             if (System.IO.File.Exists(filePath))
             {
                 System.IO.File.Delete(filePath);
@@ -71,6 +71,10 @@ namespace knowledge_station_23.Controllers
             if (id == null || id == 0) return NotFound();
             var book = Db.BookList.Find(id);
             if (book == null) return NotFound();
+            var authors = this.Db.AuthorList.ToList();
+
+            ViewBag.Authors = new SelectList(authors, "Id", "Name", book.AuthorId);
+
             return View(book);
         }
         [HttpPost]
@@ -100,6 +104,16 @@ namespace knowledge_station_23.Controllers
             var tuple = Tuple.Create(book,author.Id,author.Name);
             return View(tuple);
         }
-
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
+            var book = Db.BookList.Find(id);
+            if (book == null) return NotFound();
+            
+            DeleteImage(book.Path);
+            Db.BookList.Remove(book);
+            Db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

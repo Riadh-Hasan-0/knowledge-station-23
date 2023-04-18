@@ -10,12 +10,12 @@ namespace knowledge_station_23.Controllers
     public class AuthorController : Controller
     {
         private readonly ApplicationDbContext Db;
-        private readonly IWebHostEnvironment environment;
+        private readonly IWebHostEnvironment Environment;
 
         public AuthorController(ApplicationDbContext db,IWebHostEnvironment environment)
         {
             this.Db = db;
-            this.environment = environment;
+            this.Environment = environment;
         }
         public IActionResult Index()
         {
@@ -31,7 +31,7 @@ namespace knowledge_station_23.Controllers
 
             if (obj.ImagePath != null)
             {
-                string uploadFolder = Path.Combine(environment.WebRootPath, "Content/Image/Author/");
+                string uploadFolder = Path.Combine(Environment.WebRootPath, "Content/Image/Author/");
                 uniqueFileName = Guid.NewGuid().ToString() + "_" + obj.ImagePath.FileName;
                 string filePath = Path.Combine(uploadFolder, uniqueFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -44,7 +44,7 @@ namespace knowledge_station_23.Controllers
         }
         private void DeleteImage(string path)
         {
-            string filePath = Path.Combine(environment.WebRootPath, "Content/Image/Author/", path);
+            string filePath = Path.Combine(Environment.WebRootPath, "Content/Image/Author/", path);
             if (System.IO.File.Exists(filePath))
             {
                 System.IO.File.Delete(filePath);
@@ -68,8 +68,7 @@ namespace knowledge_station_23.Controllers
                 TempData["Success"] = "New Author created successfully";
                 return RedirectToAction("Index");
             
-            TempData["Success"] = "failed to save";
-            return View(obj);
+            
         }
         public IActionResult Edit(int? id)
         {
