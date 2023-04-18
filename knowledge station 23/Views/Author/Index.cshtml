@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Author>
+@{
+    ViewData["Title"] = "Author List";
+}
+@if (TempData["Success"] != null)
+{
+    <h2>@TempData["Success"]</h2>
+}
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Author List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Author" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-person-add"></i>&nbsp;Create New Author
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var obj in Model){
+            var imagePath = "Content/Image/Author/" + obj.Path;
+            <div class="col-3">
+            <div>
+                <div >
+                       <a asp-action="Details" asp-route-id="@obj.Id" style="text-decoration: none;">
+                  <img src="@imagePath" style="width:200px;height:200px;border:1px solid black;border-radius:10px; padding:20px;" />
+                  </a>
+                </div>
+                <div>
+                        Name:<a asp-action="Details" asp-route-id="@obj.Id" style="text-decoration: none;">&nbsp;@obj.Name</a>
+                </div>
+                
+            </div>
+        </div>
+        }
+    </div>    
+</div>
