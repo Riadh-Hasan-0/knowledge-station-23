@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Book>
+@{
+    ViewData["Title"] = "Book List";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Book List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Book" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-file-earmark-plus"></i>&nbsp;Add New Book
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var obj in Model)
+        {
+            var imagePath = "Content/Image/Book/" + obj.Path;
+            <div class="col-3">
+                <div>
+                    <div>
+                        <a asp-action="Details" asp-route-id="@obj.Id" style="text-decoration: none;">
+                            <img src="@imagePath" style="width:200px;height:200px;border:1px solid black;border-radius:10px; padding:20px;" />
+                        </a>
+                    </div>
+                    <div>
+                        Title:<a asp-action="Details" asp-route-id="@obj.Id" style="text-decoration: none;">&nbsp;@obj.Title</a>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
