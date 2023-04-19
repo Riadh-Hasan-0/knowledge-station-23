@@ -1,29 +1,33 @@
-﻿@model Author
+﻿@model Book
 @{
-    ViewData["Title"] = "Create Author";
+    ViewData["Title"] = "Create Book";
 }
 
-<link rel="stylesheet" href="~/css/DataCard.css" />
 
 <div class="row">
     <div class="col-6 offset-3 border border-dark p-4 rounded-top">
-        <h4 class="text text-center">Author Information</h4>
+        <h4 class="text text-center">Book Information</h4>
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group mb-3">
-                <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="Nationality"></label>
-                <input asp-for="Nationality" class="form-control" />
-                <span asp-validation-for="Nationality" class="text-danger"></span>
+                <label asp-for="Language"></label>
+                <input asp-for="Language" class="form-control" />
+                <span asp-validation-for="Language" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="AuthorId"></label>
+                @Html.DropDownListFor(model => model.AuthorId, ViewBag.Authors as SelectList, "--Please choose an author--", new { @class = "form-control" })
+                <span asp-validation-for="AuthorId" class="text-danger"></span>
             </div>
             <div class="row">
                 <div class="col-8">
